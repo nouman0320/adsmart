@@ -26,10 +26,35 @@
             app:layout_anchor="@+id/map"
             app:layout_anchorGravity="bottom|center" />
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/map"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:text="Oh no! please attach atleast one social account"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/imageView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="175dp"
+                android:layout_height="233dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_ghost"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,12 +71,12 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:text="Logged in with admin account"
+                android:text="Under development"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="1dp"
-                tools:ignore="MissingConstraints" />
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="1dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -94,7 +119,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        android:text="Rate"
+                        android:text="Preferences"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.514"
                         app:layout_constraintStart_toStartOf="parent"
@@ -110,7 +135,7 @@
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:layout_marginBottom="8dp"
-                        android:src="@drawable/ic_info"
+                        android:src="@drawable/ic_settings"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.511"
@@ -144,7 +169,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        android:text="Price"
+                        android:text="Twitter"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.514"
                         app:layout_constraintStart_toStartOf="parent"
@@ -160,7 +185,7 @@
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:layout_marginBottom="8dp"
-                        android:src="@drawable/ic_info"
+                        android:src="@drawable/ic_twitter"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.511"
@@ -190,7 +215,8 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        android:text="Fuel"
+                        android:text="Advertisements"
+                        android:textSize="11sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.514"
                         app:layout_constraintStart_toStartOf="parent"
@@ -206,7 +232,7 @@
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:layout_marginBottom="8dp"
-                        android:src="@drawable/ic_info"
+                        android:src="@drawable/ic_ads"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.511"
@@ -225,7 +251,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
-                    android:src="@drawable/ic_info"
+                    android:src="@drawable/ic_bar"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -252,7 +278,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        android:text="Service"
+                        android:text="Facebook"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.514"
                         app:layout_constraintStart_toStartOf="parent"
@@ -268,7 +294,7 @@
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:layout_marginBottom="8dp"
-                        android:src="@drawable/ic_info"
+                        android:src="@drawable/ic_facebook"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.511"
@@ -277,23 +303,12 @@
                         app:layout_constraintVertical_bias="0.186"
                         tools:ignore="VectorDrawableCompat" />
 
-                    <ImageView
-                        android:id="@+id/iv_fuel4"
-                        android:layout_width="25dp"
-                        android:layout_height="27dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="16dp"
-                        android:src="@drawable/ic_info"
-                        app:layout_constraintStart_toStartOf="@+id/iv_fuel"
-                        app:layout_constraintTop_toTopOf="@+id/iv_fuel"
-                        tools:ignore="VectorDrawableCompat" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <EditText
+                    android:id="@+id/et_search"
                     android:layout_width="333dp"
                     android:layout_height="41dp"
-                    android:id="@+id/et_search"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="40dp"
@@ -301,40 +316,30 @@
                     android:layout_marginRight="8dp"
                     android:background="@drawable/layout_radius_4"
                     android:ems="10"
-                    android:imeOptions="actionSearch"
                     android:hint="What are you looking for?"
+                    android:imeOptions="actionSearch"
                     android:inputType="textPersonName"
                     android:paddingLeft="40dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/imageView3"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
 
                     android:layout_marginStart="12dp"
                     android:layout_marginLeft="12dp"
-                    android:layout_marginTop="8dp"
-                    android:src="@drawable/ic_info"
+                    android:src="@drawable/ic_search"
+                    app:layout_constraintBottom_toBottomOf="@+id/et_search"
                     app:layout_constraintStart_toStartOf="@+id/et_search"
-                    app:layout_constraintTop_toTopOf="@+id/et_search"
-                    />
+                    app:layout_constraintTop_toTopOf="@+id/et_search" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.core.widget.NestedScrollView>
-
-        <ImageView
-            android:id="@+id/imageViewSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:src="@drawable/ic_locationsearch"
-            tools:ignore="VectorDrawableCompat" />
 
         <ImageView
             android:id="@+id/iv_menu"
@@ -344,20 +349,6 @@
             android:layout_marginTop="15dp"
             android:padding="5dp"
             android:src="@drawable/ic_menu"
-            tools:ignore="VectorDrawableCompat" />
-
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_help"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:layout_marginRight="10dp"
-            android:clickable="true"
-            android:src="@drawable/ic_info"
-            app:backgroundTint="@color/white"
-            app:layout_anchor="@+id/map"
-            app:layout_anchorGravity="right|top"
             tools:ignore="VectorDrawableCompat" />
 
 

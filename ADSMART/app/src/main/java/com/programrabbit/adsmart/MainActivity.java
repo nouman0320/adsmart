@@ -29,7 +29,7 @@ public class MainActivity extends FragmentActivity {
     private BottomSheetBehavior mBottomSheetBehavior;
     private Button btnMoreOptions;
 
-    private ImageView ivSearch;
+
 
     private DrawerLayout mDrawerLayout;
 
@@ -41,7 +41,6 @@ public class MainActivity extends FragmentActivity {
     private ConstraintLayout cl_rate;
 
 
-    FloatingActionButton fab_help;
 
 
 
@@ -119,7 +118,7 @@ public class MainActivity extends FragmentActivity {
         btnMoreOptions = findViewById(R.id.btn_options);
         btnMoreOptions.setTypeface(custom_font);
 
-        ivSearch = findViewById(R.id.imageViewSearch);
+
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
@@ -127,13 +126,7 @@ public class MainActivity extends FragmentActivity {
         btnMoreOptions.setVisibility(View.GONE);
 
 
-        fab_help = findViewById(R.id.fab_help);
-        fab_help.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
 
 
         iv_menu = findViewById(R.id.iv_menu);
@@ -179,7 +172,7 @@ public class MainActivity extends FragmentActivity {
             }
         });
 
-        ivSearch.setVisibility(View.GONE);
+
 
         mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
@@ -187,17 +180,17 @@ public class MainActivity extends FragmentActivity {
 
                 if (newState == BottomSheetBehavior.STATE_HIDDEN){
                     btnMoreOptions.setVisibility(View.VISIBLE);
-                    ivSearch.setVisibility(View.VISIBLE);
+
                 }
                 else if(newState == BottomSheetBehavior.STATE_COLLAPSED){
-                    ivSearch.setVisibility(View.GONE);
+
                 }
                 else if(newState == BottomSheetBehavior.STATE_HALF_EXPANDED){
-                    ivSearch.setVisibility(View.GONE);
+
                 }
                 else {
                     btnMoreOptions.setVisibility(View.GONE);
-                    ivSearch.setVisibility(View.GONE);
+
                 }
             }
 
