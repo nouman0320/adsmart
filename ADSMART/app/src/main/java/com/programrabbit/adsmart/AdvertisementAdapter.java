@@ -42,7 +42,7 @@ public class AdvertisementAdapter extends RecyclerView.Adapter<AdvertisementAdap
         holder.tv_price.setText(advertisementList.get(position).getPrice());
         holder.tv_description.setText(advertisementList.get(position).getDescription());
 
-        Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(holder.thumbnail);
+        Picasso.get().load(advertisementList.get(position).getPhoto_url()).into(holder.thumbnail);
 
     }
 
