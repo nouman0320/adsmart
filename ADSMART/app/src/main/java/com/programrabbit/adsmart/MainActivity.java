@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -15,15 +16,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+
 import androidx.fragment.app.FragmentActivity;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements FeedFragment.OnFragmentInteractionListener, AdvertisementFragment.OnFragmentInteractionListener {
 
 
     private BottomSheetBehavior mBottomSheetBehavior;
@@ -33,12 +36,12 @@ public class MainActivity extends FragmentActivity {
 
     private DrawerLayout mDrawerLayout;
 
-    private ImageView iv_menu;
+    //private ImageView iv_menu;
 
-    private ConstraintLayout cl_service;
-    private ConstraintLayout cl_fuel;
-    private ConstraintLayout cl_price;
-    private ConstraintLayout cl_rate;
+    private ConstraintLayout cl_facebook;
+    private ConstraintLayout cl_twitter;
+    private ConstraintLayout cl_pref;
+    private ConstraintLayout cl_ad;
 
 
 
@@ -48,13 +51,15 @@ public class MainActivity extends FragmentActivity {
     private EditText et_search;
 
 
-    private TextView tv_service;
-    private TextView tv_fuel;
-    private TextView tv_price;
+    private TextView tv_facebook;
+    private TextView tv_ad;
+    private TextView tv_twitter;
 
     private AlertDialog progressDialog;
 
 
+    FeedFragment feed_frag;
+    AdvertisementFragment ad_frag;
 
     ConstraintLayout cl_admin;
 
@@ -72,7 +77,16 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
 
 
+        Bundle bundle = new Bundle();
+        bundle.putString("open", "facebook");
+        feed_frag = new FeedFragment();
+        feed_frag.setArguments(bundle);
 
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, feed_frag)
+                .commit();
 
         et_search = findViewById(R.id.et_search);
         et_search.setFocusable(true);
@@ -97,20 +111,20 @@ public class MainActivity extends FragmentActivity {
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/MYRIADPRO-REGULAR.OTF");
 
 
-        tv_service = findViewById(R.id.tv_service);
-        tv_fuel = findViewById(R.id.tv_fuel);
-        tv_price = findViewById(R.id.tv_price);
+        tv_facebook = findViewById(R.id.tv_facebook);
+        tv_ad = findViewById(R.id.tv_ad);
+        tv_twitter = findViewById(R.id.tv_twitter);
 
 
-        tv_service.setTypeface(custom_font);
-        tv_fuel.setTypeface(custom_font);
-        tv_price.setTypeface(custom_font);
+        tv_facebook.setTypeface(custom_font);
+        tv_ad.setTypeface(custom_font);
+        tv_twitter.setTypeface(custom_font);
 
 
-        cl_service = findViewById(R.id.cl_service);
-        cl_fuel = findViewById(R.id.cl_fuel);
-        cl_price = findViewById(R.id.cl_price);
-        cl_rate = findViewById(R.id.cl_exchange);
+        cl_facebook = findViewById(R.id.cl_facebook);
+        cl_ad = findViewById(R.id.cl_ad);
+        cl_twitter = findViewById(R.id.cl_twitter);
+        cl_pref = findViewById(R.id.cl_pref);
 
         View bottomSheet = findViewById(R.id.bottom_sheet);
 
@@ -129,8 +143,9 @@ public class MainActivity extends FragmentActivity {
 
 
 
-        iv_menu = findViewById(R.id.iv_menu);
+        //iv_menu = findViewById(R.id.iv_menu);
 
+        /*
         iv_menu.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("WrongConstant")
             @Override
@@ -138,34 +153,55 @@ public class MainActivity extends FragmentActivity {
                 mDrawerLayout.openDrawer(Gravity.START);
             }
         });
+        */
 
-
-        cl_service.setOnClickListener(new View.OnClickListener() {
+        cl_facebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //SignupActivity.this.finish();
+                Bundle bundle = new Bundle();
+                bundle.putString("open", "facebook");
+                feed_frag = new FeedFragment();
+                feed_frag.setArguments(bundle);
+
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, feed_frag)
+                        .commit();
             }
         });
 
-        cl_fuel.setOnClickListener(new View.OnClickListener() {
+        cl_twitter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //SignupActivity.this.finish();
+                Bundle bundle = new Bundle();
+                bundle.putString("open", "twitter");
+                feed_frag = new FeedFragment();
+                feed_frag.setArguments(bundle);
+
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, feed_frag)
+                        .commit();
             }
         });
 
 
-        cl_price.setOnClickListener(new View.OnClickListener() {
+        cl_ad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //SignupActivity.this.finish();
+                ad_frag = new AdvertisementFragment();
+
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, ad_frag)
+                        .commit();
             }
         });
 
-        cl_rate.setOnClickListener(new View.OnClickListener() {
+        cl_pref.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -228,10 +264,8 @@ public class MainActivity extends FragmentActivity {
     }
 
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
-
-
-
-
-
+    }
 }

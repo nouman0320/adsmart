@@ -23,9 +23,17 @@
             android:keepScreenOn="true"
             android:text="More Options"
             android:textSize="12sp"
-            app:layout_anchor="@+id/map"
+            app:layout_anchor="@+id/fragment_container"
             app:layout_anchorGravity="bottom|center" />
 
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+
+        <!--
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/map"
             android:layout_width="match_parent"
@@ -55,29 +63,7 @@
                 android:src="@drawable/ic_ghost"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_admin"
-            android:layout_width="match_parent"
-            android:layout_height="21dp"
-            android:background="@color/pink_pressed">
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:text="Under development"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteY="1dp" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        -->
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/bottom_sheet"
@@ -100,18 +86,18 @@
                 >
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_exchange"
+                    android:id="@+id/cl_pref"
                     android:layout_width="97dp"
                     android:layout_height="95dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/layout_radius_3"
-                    app:layout_constraintEnd_toEndOf="@+id/cl_service"
+                    app:layout_constraintEnd_toEndOf="@+id/cl_facebook"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/cl_service"
-                    app:layout_constraintTop_toBottomOf="@+id/cl_service">
+                    app:layout_constraintStart_toStartOf="@+id/cl_facebook"
+                    app:layout_constraintTop_toBottomOf="@+id/cl_facebook">
 
                     <TextView
-                        android:id="@+id/tv_exchange"
+                        android:id="@+id/tv_pref"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -123,10 +109,10 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.514"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/iv_exchange" />
+                        app:layout_constraintTop_toBottomOf="@+id/iv_pref" />
 
                     <ImageView
-                        android:id="@+id/iv_exchange"
+                        android:id="@+id/iv_pref"
                         android:layout_width="47dp"
                         android:layout_height="45dp"
                         android:layout_marginStart="8dp"
@@ -147,7 +133,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_price"
+                    android:id="@+id/cl_twitter"
                     android:layout_width="97dp"
                     android:layout_height="95dp"
                     android:layout_marginStart="8dp"
@@ -161,7 +147,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/et_search">
 
                     <TextView
-                        android:id="@+id/tv_price"
+                        android:id="@+id/tv_twitter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -173,10 +159,10 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.514"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/iv_fuel2" />
+                        app:layout_constraintTop_toBottomOf="@+id/iv_twitter" />
 
                     <ImageView
-                        android:id="@+id/iv_fuel2"
+                        android:id="@+id/iv_twitter"
                         android:layout_width="47dp"
                         android:layout_height="45dp"
                         android:layout_marginStart="8dp"
@@ -196,18 +182,18 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_fuel"
+                    android:id="@+id/cl_ad"
                     android:layout_width="97dp"
                     android:layout_height="93dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="14dp"
                     android:layout_marginTop="16dp"
                     android:background="@drawable/layout_radius_3"
-                    app:layout_constraintStart_toEndOf="@+id/cl_price"
+                    app:layout_constraintStart_toEndOf="@+id/cl_twitter"
                     app:layout_constraintTop_toBottomOf="@+id/et_search">
 
                     <TextView
-                        android:id="@+id/tv_fuel"
+                        android:id="@+id/tv_ad"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -220,10 +206,10 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.514"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/iv_fuel3" />
+                        app:layout_constraintTop_toBottomOf="@+id/iv_ad" />
 
                     <ImageView
-                        android:id="@+id/iv_fuel3"
+                        android:id="@+id/iv_ad"
                         android:layout_width="47dp"
                         android:layout_height="45dp"
                         android:layout_marginStart="8dp"
@@ -259,18 +245,18 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_service"
+                    android:id="@+id/cl_facebook"
                     android:layout_width="97dp"
                     android:layout_height="95dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:background="@drawable/layout_radius_1"
-                    app:layout_constraintEnd_toStartOf="@+id/cl_price"
+                    app:layout_constraintEnd_toStartOf="@+id/cl_twitter"
                     app:layout_constraintTop_toBottomOf="@+id/et_search">
 
                     <TextView
-                        android:id="@+id/tv_service"
+                        android:id="@+id/tv_facebook"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -282,10 +268,10 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.514"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/iv_fuel" />
+                        app:layout_constraintTop_toBottomOf="@+id/iv_facebook" />
 
                     <ImageView
-                        android:id="@+id/iv_fuel"
+                        android:id="@+id/iv_facebook"
                         android:layout_width="47dp"
                         android:layout_height="45dp"
                         android:layout_marginStart="8dp"
@@ -340,16 +326,6 @@
 
 
         </androidx.core.widget.NestedScrollView>
-
-        <ImageView
-            android:id="@+id/iv_menu"
-            android:layout_width="35dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
-            android:padding="5dp"
-            android:src="@drawable/ic_menu"
-            tools:ignore="VectorDrawableCompat" />
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
