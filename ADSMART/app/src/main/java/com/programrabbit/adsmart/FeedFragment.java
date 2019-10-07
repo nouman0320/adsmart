@@ -45,7 +45,7 @@ public class FeedFragment extends Fragment {
     //TextView tv_open;
     String open = "facebook";
 
-    String target_url = "http://m.facebook.com";
+    String target_url = "http://m.twitter.com";
 
     public FeedFragment() {
         // Required empty public constructor

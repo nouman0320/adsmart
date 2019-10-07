@@ -2,12 +2,17 @@ package com.programrabbit.adsmart;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.widget.Toast;
 
 
@@ -19,7 +24,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class SplashActivity extends AppCompatActivity {
     private final int SPLASH_DISPLAY_LENGTH = 1000;
 
-    private Context mContext= SplashActivity.this;
+    private Context mContext = SplashActivity.this;
     private static final int REQUEST = 112;
 
 
@@ -36,30 +41,25 @@ public class SplashActivity extends AppCompatActivity {
 
         /* New Handler to start the Menu-Activity
          * and close this Splash-Screen after some seconds.*/
-        new Handler().postDelayed(new Runnable(){
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
 
-
-                if (Build.VERSION.SDK_INT >= 23)
-                {
-                    String[] PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.INTERNET};
-                    if (!hasPermissions(mContext, PERMISSIONS))
-                    {
-                        ActivityCompat.requestPermissions((Activity) mContext, PERMISSIONS, REQUEST );
-                    }
-                    else
-                    {
+                if (Build.VERSION.SDK_INT >= 23) {
+                    String[] PERMISSIONS = {Manifest.permission.INTERNET};
+                    if (!hasPermissions(mContext, PERMISSIONS)) {
+                        ActivityCompat.requestPermissions((Activity) mContext, PERMISSIONS, REQUEST);
+                    } else {
                         //do here
+                        //isConnected(getApplicationContext());
                         loadMainApp();
                     }
                 } else {
                     //do here
+                    //isConnected(getApplicationContext());
                     loadMainApp();
                 }
-
-
 
 
             }
@@ -95,11 +95,44 @@ public class SplashActivity extends AppCompatActivity {
         return true;
     }
 
-    public void loadMainApp(){
+    public void loadMainApp() {
         Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
         SplashActivity.this.startActivity(mainIntent);
         SplashActivity.this.finish();
 
 
     }
+
+
+    public boolean isConnected(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifiInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo mobileInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+        if ((wifiInfo != null && wifiInfo.isConnected()) || (mobileInfo != null && mobileInfo.isConnected())) {
+            return true;
+        } else {
+            showDialog();
+            return false;
+        }
+    }
+
+    private void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("AdSmart requires internet for proper functionality.")
+                .setCancelable(false)
+                .setPositiveButton("Connect to WIFI", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                    }
+                })
+                .setNegativeButton("Quit", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
 }

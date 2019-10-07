@@ -6,12 +6,12 @@
     <item android:title="Personalized Ads">
     <menu>
         <item android:id="@+id/toggle_facebook_api"
-            android:icon="@drawable/ic_error"
-            android:title="Connect Facebook"/>
+            android:icon="@drawable/ic_facebook"
+            android:title="Manage Facebook"/>
 
         <item android:id="@+id/toggle_twitter_api"
-            android:icon="@drawable/ic_error"
-            android:title="Connect Twitter"/>
+            android:icon="@drawable/ic_twitter"
+            android:title="Manage Twitter"/>
     </menu>
     </item>
 
@@ -30,19 +30,15 @@
                 android:title="Twitter API Data"/>
         </menu>
     </item>
-
+   <!--
     <item android:title="Account Settings">
         <menu>
-            <!--
-            <item android:id="@+id/nav_settings"
-                android:icon="@drawable/ic_settings_black_24dp"
-                android:title="Settings"/>
-                -->
 
             <item android:id="@+id/nav_signout"
                 android:icon="@drawable/ic_signout"
                 android:title="Reset all"/>
         </menu>
     </item>
+    -->
 
 </menu>

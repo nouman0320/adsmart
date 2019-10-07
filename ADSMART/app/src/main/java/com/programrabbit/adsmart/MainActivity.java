@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -21,6 +22,10 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.navigation.NavigationView;
+import com.twitter.sdk.android.core.DefaultLogger;
+import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterConfig;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -33,6 +38,9 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class MainActivity extends FragmentActivity implements NavigationView.OnNavigationItemSelectedListener, FeedFragment.OnFragmentInteractionListener, AdvertisementFragment.OnFragmentInteractionListener {
+
+
+
 
 
     private BottomSheetBehavior mBottomSheetBehavior;
@@ -73,11 +81,6 @@ public class MainActivity extends FragmentActivity implements NavigationView.OnN
 
     ConstraintLayout cl_admin;
 
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
-
 
 
 
@@ -86,10 +89,19 @@ public class MainActivity extends FragmentActivity implements NavigationView.OnN
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+        TwitterConfig config = new TwitterConfig.Builder(this)
+                .logger(new DefaultLogger(Log.DEBUG))
+                .twitterAuthConfig(new TwitterAuthConfig(getString(R.string.CONSUMER_KEY), getString(R.string.CONSUMER_SECRET)))
+                .debug(true)
+                .build();
+        Twitter.initialize(config);
+
         setNavigationViewListener();
 
         Bundle bundle = new Bundle();
-        bundle.putString("open", "facebook");
+        bundle.putString("open", "twitter");
         feed_frag = new FeedFragment();
         feed_frag.setArguments(bundle);
 
@@ -282,12 +294,14 @@ public class MainActivity extends FragmentActivity implements NavigationView.OnN
         switch (item.getItemId()) {
 
             case R.id.toggle_facebook_api: {
-                Toast.makeText(getApplicationContext(),"1", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(this, FacebookLoginActivity.class);
+                startActivity(i);
                 break;
             }
 
             case R.id.toggle_twitter_api: {
-                //do somthing
+                Intent i = new Intent(this, TwitterLoginActivity.class);
+                startActivity(i);
                 break;
             }
 
@@ -298,17 +312,14 @@ public class MainActivity extends FragmentActivity implements NavigationView.OnN
             }
 
             case R.id.facebook_data: {
-                //do somthing
+                Intent i = new Intent(this, FacebookVisualizationActivity.class);
+                startActivity(i);
                 break;
             }
 
             case R.id.twitter_data: {
-                //do somthing
-                break;
-            }
-
-            case R.id.nav_signout: {
-                //do somthing
+                Intent i = new Intent(this, TwitterVisualizationActivity.class);
+                startActivity(i);
                 break;
             }
 
