@@ -150,7 +150,7 @@ public class AdvertisementFragment extends Fragment {
         List<Advertisement> toReturn = new ArrayList<>();
         toReturn.add(new Advertisement("Apple iPhone XS Max - QHD+ Notch Display - Face ID - Dual sim (HK) With FaceTime PTA APPROVED", "", "Rs. 229,999", "https://static-01.daraz.pk/p/aca8cabb1f87c24a9c38901cf4720d02.jpg"));
         toReturn.add(new Advertisement("New Original Apple Watch Series 5 Space Gray Aluminum Case Black Sport Band (GPS 44mm )", "", "Rs. 89,000", "https://techcrunch.com/wp-content/uploads/2018/09/IMG_3293.jpg?w=730&crop=1"));
-        toReturn.add(new Advertisement("Sony Extra Bass MDR-XB650BT Headphones", "EXTRA BASS For Deep, Punchy Sound, One-Touch Listening With Bluetooth And NFC", "Rs. 22,000", "http://www.comparebaazar.com/wp-content/uploads/2018/06/Sony-Extra-Bass-MDR-XB650BT-Headphones-price.jpg"));
+        toReturn.add(new Advertisement("Sony Extra Bass MDR-XB650BT Headphones", "", "Rs. 22,000", "http://www.comparebaazar.com/wp-content/uploads/2018/06/Sony-Extra-Bass-MDR-XB650BT-Headphones-price.jpg"));
         toReturn.add(new Advertisement("Original Apple AirPods 2 Wireless Charging Case Bluetooth Headset White - Non Active 1 Year Apple Care International Warranty", "", "Rs. 49,0000", "https://media.idownloadblog.com/wp-content/uploads/2019/06/iOS-13-AirPods-notifications-banner.jpg"));
         toReturn.add(new Advertisement("iTunes Card - 50 Dollars", "Give the gift of one-stop entertainment, to all the Apple-lovers out there.", "Rs. 7,989", "https://www.computercaredubai.ae/media/catalog/product/cache/1/image/700x/040ec09b1e35df139433887a97daa66f/a/c/accappleitune50.png"));
 

@@ -3,11 +3,13 @@ package com.programrabbit.adsmart;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
@@ -15,10 +17,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 
@@ -26,7 +32,7 @@ import androidx.fragment.app.FragmentActivity;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
-public class MainActivity extends FragmentActivity implements FeedFragment.OnFragmentInteractionListener, AdvertisementFragment.OnFragmentInteractionListener {
+public class MainActivity extends FragmentActivity implements NavigationView.OnNavigationItemSelectedListener, FeedFragment.OnFragmentInteractionListener, AdvertisementFragment.OnFragmentInteractionListener {
 
 
     private BottomSheetBehavior mBottomSheetBehavior;
@@ -58,6 +64,10 @@ public class MainActivity extends FragmentActivity implements FeedFragment.OnFra
     private AlertDialog progressDialog;
 
 
+    private boolean fbApiAttached = false;
+    private boolean twitterApiAttached = false;
+
+
     FeedFragment feed_frag;
     AdvertisementFragment ad_frag;
 
@@ -76,6 +86,7 @@ public class MainActivity extends FragmentActivity implements FeedFragment.OnFra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setNavigationViewListener();
 
         Bundle bundle = new Bundle();
         bundle.putString("open", "facebook");
@@ -202,9 +213,10 @@ public class MainActivity extends FragmentActivity implements FeedFragment.OnFra
         });
 
         cl_pref.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("WrongConstant")
             @Override
             public void onClick(View v) {
-
+                mDrawerLayout.openDrawer(Gravity.START);
             }
         });
 
@@ -255,17 +267,63 @@ public class MainActivity extends FragmentActivity implements FeedFragment.OnFra
         rlp.setMargins(0, 360, 220, 0);*/
 
 
-
-
-
-
-
-
     }
+
 
 
     @Override
     public void onFragmentInteraction(Uri uri) {
 
     }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // Handle navigation view item clicks here.
+        switch (item.getItemId()) {
+
+            case R.id.toggle_facebook_api: {
+                Toast.makeText(getApplicationContext(),"1", Toast.LENGTH_LONG).show();
+                break;
+            }
+
+            case R.id.toggle_twitter_api: {
+                //do somthing
+                break;
+            }
+
+            case R.id.post_type: {
+                Intent i = new Intent(this, CategoryVisualizationActivity.class);
+                startActivity(i);
+                break;
+            }
+
+            case R.id.facebook_data: {
+                //do somthing
+                break;
+            }
+
+            case R.id.twitter_data: {
+                //do somthing
+                break;
+            }
+
+            case R.id.nav_signout: {
+                //do somthing
+                break;
+            }
+
+
+        }
+        //close navigation drawer
+        //mDrawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+
+
+    private void setNavigationViewListener() {
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
 }

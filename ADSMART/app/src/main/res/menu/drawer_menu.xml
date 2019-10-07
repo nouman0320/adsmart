@@ -3,6 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+    <item android:title="Personalized Ads">
+    <menu>
+        <item android:id="@+id/toggle_facebook_api"
+            android:icon="@drawable/ic_error"
+            android:title="Connect Facebook"/>
+
+        <item android:id="@+id/toggle_twitter_api"
+            android:icon="@drawable/ic_error"
+            android:title="Connect Twitter"/>
+    </menu>
+    </item>
+
+    <item android:title="Data Visualization">
+        <menu>
+            <item android:id="@+id/post_type"
+                android:icon="@drawable/ic_list"
+                android:title="Post Categorization"/>
+
+            <item android:id="@+id/facebook_data"
+                android:icon="@drawable/ic_api"
+                android:title="Facebook API Data"/>
+
+            <item android:id="@+id/twitter_data"
+                android:icon="@drawable/ic_api"
+                android:title="Twitter API Data"/>
+        </menu>
+    </item>
+
     <item android:title="Account Settings">
         <menu>
             <!--
@@ -13,7 +41,7 @@
 
             <item android:id="@+id/nav_signout"
                 android:icon="@drawable/ic_signout"
-                android:title="Sign out"/>
+                android:title="Reset all"/>
         </menu>
     </item>
 
