@@ -6,6 +6,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -14,6 +15,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.programrabbit.adsmart.Network.UserData;
 
 import java.util.Arrays;
 
@@ -51,6 +53,10 @@ public class FacebookLoginActivity extends AppCompatActivity {
                 AccessToken accessToken = AccessToken.getCurrentAccessToken();
                 boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
                 Toast.makeText(FacebookLoginActivity.this, String.valueOf(isLoggedIn), Toast.LENGTH_SHORT).show();
+
+                UserData userData = UserData.getInstance();
+                userData.startFetchingUserData(getApplicationContext());
+
                 finish();
             }
 
