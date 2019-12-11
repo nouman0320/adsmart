@@ -8,11 +8,31 @@ import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
+import com.google.gson.Gson;
 import com.programrabbit.adsmart.FacebookLoginActivity;
+import com.programrabbit.adsmart.R;
+import com.programrabbit.adsmart.TwitterLoginActivity;
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.DefaultLogger;
+import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.core.TwitterApiClient;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterConfig;
+import com.twitter.sdk.android.core.TwitterCore;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.models.Tweet;
+import com.twitter.sdk.android.core.models.User;
+import com.twitter.sdk.android.core.services.AccountService;
+import com.twitter.sdk.android.core.services.StatusesService;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
+
+import retrofit2.Call;
 
 public class UserData {
 
@@ -93,13 +113,14 @@ public class UserData {
                             JSONObject post = postArr.getJSONObject(i);
 
                             JSONObject toPut = new JSONObject();
+                            toPut.put("Text", post.getString("message"));
                             textArray.put(toPut);
 
-                            toPut.put("Text", post.getString("message"));
                             Log.d("fb_call", post.getString("message"));
                         }
                         //facebookJSON.put("Data", textArray);
 
+                        startFetchingTwitter(context);
 
                         //Log.d("test1", facebookJSON.toString());
 
@@ -117,11 +138,76 @@ public class UserData {
     }
 
     public void startFetchingTwitter(final Context context){
+        TwitterConfig config = new TwitterConfig.Builder(context)
+                .logger(new DefaultLogger(Log.DEBUG))
+                .twitterAuthConfig(new TwitterAuthConfig(context.getString(R.string.CONSUMER_KEY), context.getString(R.string.CONSUMER_SECRET)))
+                .debug(true)
+                .build();
+        Twitter.initialize(config);
 
+        if(TwitterCore.getInstance().getSessionManager().getActiveSession() == null){
+            Log.d("twitter1", "user not logged in");
+            Intent i = new Intent(context, TwitterLoginActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(i);
+            return;
+        }
+
+
+        TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
+        StatusesService statusesService = twitterApiClient.getStatusesService();
+        statusesService
+                .userTimeline(TwitterCore
+                                .getInstance()
+                                .getSessionManager()
+                                .getActiveSession()
+                                .getUserId(),
+                        null, null, null, null, null, null, null, null)
+                .enqueue(new Callback<List<Tweet>>() {
+                    @Override
+                    public void success(Result<List<Tweet>> result) {
+                        if(textArray == null){
+                            textArray = new JSONArray();
+                        }
+                        for(int i=0; i < result.data.size(); i++){
+                            Log.d("twitter1", result.data.get(i).text);
+                            JSONObject toPut = new JSONObject();
+                            try {
+                                toPut.put("Text", result.data.get(i).text);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            textArray.put(toPut);
+                        }
+
+                        startSendingToApi();
+                    }
+
+                    @Override
+                    public void failure(TwitterException exception) {
+
+                    }
+                });
     }
+
 
     public void startFetchingUserData(final Context context){
+        textArray = null;
         this.startFetchingFacebook(context);
-        this.startFetchingTwitter(context);
+        //this.startFetchingTwitter(context);
     }
+
+    private void startSendingToApi(){
+        JSONObject toSend = new JSONObject();
+        try {
+            toSend.put("Email", userEmail);
+            toSend.put("Data", textArray);
+            Log.d("twitter2", toSend.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        textArray = null;
+    }
+
 }
