@@ -3,7 +3,14 @@ package com.programrabbit.adsmart.Network;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
@@ -41,6 +48,12 @@ public class UserData {
     private static String userEmail = "";
 
     private static JSONArray textArray;
+
+    private static final String SERVER_IP = "192.168.0.104";
+    private static final String SERVER_PORT = "51488";
+
+
+    private static final String API_URL = "http://"+SERVER_IP+":"+SERVER_PORT+"/api/";
 
 
     public UserData() {
@@ -180,7 +193,7 @@ public class UserData {
                             textArray.put(toPut);
                         }
 
-                        startSendingToApi();
+                        startSendingToApi(context);
                     }
 
                     @Override
@@ -197,17 +210,42 @@ public class UserData {
         //this.startFetchingTwitter(context);
     }
 
-    private void startSendingToApi(){
+    private void startSendingToApi(final Context context){
         JSONObject toSend = new JSONObject();
         try {
             toSend.put("Email", userEmail);
             toSend.put("Data", textArray);
             Log.d("twitter2", toSend.toString());
+            sendToApi(toSend, context);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         textArray = null;
     }
+
+    private void sendToApi(JSONObject toSend, final Context context){
+        RequestQueue requstQueue = Volley.newRequestQueue(context);
+
+        JsonObjectRequest jsonobj = new JsonObjectRequest(Request.Method.POST, this.API_URL+"post",toSend,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        /*
+                        if(mResultCallback != null){
+                            mResultCallback.notifySuccess(response);
+                        }*/
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
+        requstQueue.add(jsonobj);
+    }
+
 
 }
