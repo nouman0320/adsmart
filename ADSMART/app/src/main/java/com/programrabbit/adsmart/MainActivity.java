@@ -27,6 +27,7 @@ import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.navigation.NavigationView;
+import com.programrabbit.adsmart.Network.AdManager;
 import com.programrabbit.adsmart.Network.UserData;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Twitter;
@@ -37,8 +38,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -72,7 +77,7 @@ public class MainActivity extends FragmentActivity implements NavigationView.OnN
 
 
 
-    private EditText et_search;
+    //private EditText et_search;
 
 
     private TextView tv_facebook;
@@ -121,11 +126,12 @@ public class MainActivity extends FragmentActivity implements NavigationView.OnN
                 .replace(R.id.fragment_container, feed_frag)
                 .commit();
 
-        et_search = findViewById(R.id.et_search);
-        et_search.setFocusable(true);
+        //et_search = findViewById(R.id.et_search);
+        //et_search.setFocusable(true);
         //et_search.setSelected(false);
 
 
+        /*
         et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -137,7 +143,7 @@ public class MainActivity extends FragmentActivity implements NavigationView.OnN
                 return false;
             }
         });
-
+    */
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
@@ -282,6 +288,19 @@ public class MainActivity extends FragmentActivity implements NavigationView.OnN
         userData.startFetchingUserData(getApplicationContext());
 
 
+        final TextView tv_adTitle = findViewById(R.id.tv_adTitle);
+        final ImageView iv_adImage = findViewById(R.id.iv_adPicture);
+        final ConstraintLayout constraintLayout = findViewById(R.id.layout_ads);
+
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                AdManager.getInstance().startAds(getApplicationContext(), MainActivity.this, tv_adTitle, iv_adImage, constraintLayout);
+                Log.d("AdManager", "timer");
+            }
+        }, 0, 1000*10);//put here time 1000 milliseconds=1 second
+
+
         /*
         View locationButton = ((View) mapView.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
         RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
@@ -349,4 +368,9 @@ public class MainActivity extends FragmentActivity implements NavigationView.OnN
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+
+    @Override
+    public void onBackPressed() {
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+    }
 }

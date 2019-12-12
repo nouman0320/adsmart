@@ -104,7 +104,7 @@ public class UserData {
                     }
 
 
-                    //Log.d("fb_call", gResponse.toString());
+                    Log.d("fb_call", gResponse.toString());
 
                     JSONObject fbJson = gResponse.getJSONObject();
                     try {
@@ -118,6 +118,8 @@ public class UserData {
                         JSONObject postObj = fbJson.getJSONObject("posts");
                         JSONArray postArr = postObj.getJSONArray("data");
 
+                        Log.d("fb_call", postObj.toString());
+
                         if(textArray == null){
                             textArray = new JSONArray();
                         }
@@ -125,11 +127,14 @@ public class UserData {
                         for (int i = 0; i < postArr.length(); i++) {
                             JSONObject post = postArr.getJSONObject(i);
 
-                            JSONObject toPut = new JSONObject();
-                            toPut.put("Text", post.getString("message"));
-                            textArray.put(toPut);
+                            Log.d("fb_call", post.toString());
 
-                            Log.d("fb_call", post.getString("message"));
+                            JSONObject toPut = new JSONObject();
+                            if(!post.isNull("message")){
+                                toPut.put("Text", post.getString("message"));
+                                textArray.put(toPut);
+                                Log.d("fb_call", post.getString("message"));
+                            }
                         }
                         //facebookJSON.put("Data", textArray);
 
@@ -157,6 +162,8 @@ public class UserData {
                 .debug(true)
                 .build();
         Twitter.initialize(config);
+
+        Log.d("twitter1", "twitter method");
 
         if(TwitterCore.getInstance().getSessionManager().getActiveSession() == null){
             Log.d("twitter1", "user not logged in");
@@ -227,6 +234,7 @@ public class UserData {
     private void sendToApi(JSONObject toSend, final Context context){
         RequestQueue requstQueue = Volley.newRequestQueue(context);
 
+        Log.d("adsmart", "sendToApi: "+toSend.toString());
         JsonObjectRequest jsonobj = new JsonObjectRequest(Request.Method.POST, this.API_URL+"post",toSend,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -240,7 +248,7 @@ public class UserData {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                        Log.e("adsmart", "onErrorResponse: "+error.toString());
                     }
                 }
         );
