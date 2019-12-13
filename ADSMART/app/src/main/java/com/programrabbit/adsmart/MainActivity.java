@@ -27,6 +27,7 @@ import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.FirebaseApp;
 import com.programrabbit.adsmart.Network.AdManager;
 import com.programrabbit.adsmart.Network.UserData;
 import com.twitter.sdk.android.core.DefaultLogger;
@@ -104,6 +105,7 @@ public class MainActivity extends FragmentActivity implements NavigationView.OnN
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FirebaseApp.initializeApp(getApplicationContext());
 
 
         TwitterConfig config = new TwitterConfig.Builder(this)
@@ -291,6 +293,8 @@ public class MainActivity extends FragmentActivity implements NavigationView.OnN
         final TextView tv_adTitle = findViewById(R.id.tv_adTitle);
         final ImageView iv_adImage = findViewById(R.id.iv_adPicture);
         final ConstraintLayout constraintLayout = findViewById(R.id.layout_ads);
+
+        AdManager.getInstance().loadAds();
 
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override

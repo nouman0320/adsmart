@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.programrabbit.adsmart.Network.AdManager;
 import com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView;
 
 import java.util.ArrayList;
@@ -146,24 +147,33 @@ public class AdvertisementFragment extends Fragment {
 
     }
 
+
+
     List<Advertisement> loadProductForYou(){
+
         List<Advertisement> toReturn = new ArrayList<>();
-        toReturn.add(new Advertisement("Apple iPhone XS Max - QHD+ Notch Display - Face ID - Dual sim (HK) With FaceTime PTA APPROVED", "", "Rs. 229,999", "https://static-01.daraz.pk/p/aca8cabb1f87c24a9c38901cf4720d02.jpg"));
-        toReturn.add(new Advertisement("New Original Apple Watch Series 5 Space Gray Aluminum Case Black Sport Band (GPS 44mm )", "", "Rs. 89,000", "https://techcrunch.com/wp-content/uploads/2018/09/IMG_3293.jpg?w=730&crop=1"));
-        toReturn.add(new Advertisement("Sony Extra Bass MDR-XB650BT Headphones", "", "Rs. 22,000", "http://www.comparebaazar.com/wp-content/uploads/2018/06/Sony-Extra-Bass-MDR-XB650BT-Headphones-price.jpg"));
-        toReturn.add(new Advertisement("Original Apple AirPods 2 Wireless Charging Case Bluetooth Headset White", "", "Rs. 49,0000", "https://media.idownloadblog.com/wp-content/uploads/2019/06/iOS-13-AirPods-notifications-banner.jpg"));
-        toReturn.add(new Advertisement("iTunes Card - 50 Dollars", "Give the gift of one-stop entertainment, to all the Apple-lovers out there.", "Rs. 7,989", "https://www.computercaredubai.ae/media/catalog/product/cache/1/image/700x/040ec09b1e35df139433887a97daa66f/a/c/accappleitune50.png"));
+
+        for(int i=0;i<AdManager.advertisements.size();i++){
+            toReturn.add(new Advertisement(AdManager.advertisements.get(i).title, "", "Rs. "+AdManager.advertisements.get(i).price, AdManager.advertisements.get(i).imageUrl, AdManager.advertisements.get(i).url));
+        }
+
+        //toReturn.add(new Advertisement("Apple iPhone XS Max - QHD+ Notch Display - Face ID - Dual sim (HK) With FaceTime PTA APPROVED", "", "Rs. 229,999", "https://static-01.daraz.pk/p/aca8cabb1f87c24a9c38901cf4720d02.jpg"));
+        //toReturn.add(new Advertisement("New Original Apple Watch Series 5 Space Gray Aluminum Case Black Sport Band (GPS 44mm )", "", "Rs. 89,000", "https://techcrunch.com/wp-content/uploads/2018/09/IMG_3293.jpg?w=730&crop=1"));
+        //toReturn.add(new Advertisement("Sony Extra Bass MDR-XB650BT Headphones", "", "Rs. 22,000", "http://www.comparebaazar.com/wp-content/uploads/2018/06/Sony-Extra-Bass-MDR-XB650BT-Headphones-price.jpg"));
+        //toReturn.add(new Advertisement("Original Apple AirPods 2 Wireless Charging Case Bluetooth Headset White", "", "Rs. 49,0000", "https://media.idownloadblog.com/wp-content/uploads/2019/06/iOS-13-AirPods-notifications-banner.jpg"));
+        //toReturn.add(new Advertisement("iTunes Card - 50 Dollars", "Give the gift of one-stop entertainment, to all the Apple-lovers out there.", "Rs. 7,989", "https://www.computercaredubai.ae/media/catalog/product/cache/1/image/700x/040ec09b1e35df139433887a97daa66f/a/c/accappleitune50.png"));
 
         return toReturn;
     }
 
     List<Advertisement> loadPopularProduct(){
+
         List<Advertisement> toReturn = new ArrayList<>();
-        toReturn.add(new Advertisement("Galaxy Note 9 - 6.4\" - 6Gb Ram - 128Gb Rom - Dual Sim - Ocean Blue", "", "Rs. 149,000", "https://cnet3.cbsistatic.com/img/9ZuQOnOyKtMTzVm-GnTVtZwMmds=/2018/08/15/cfdf138b-06fc-42bf-b61f-724f248f05a9/samsung-galaxy-note-9-use-1161.jpg"));
-        toReturn.add(new Advertisement("W11+ PUBG Gamepad PUBG Controller With 2 Builtin Triggers", "", "RS. 500", "https://5.imimg.com/data5/RE/QA/MY-40309194/metal-pubg-game-controller-joystick-500x500.jpeg"));
-        toReturn.add(new Advertisement("Pack Of 6 Rooh Afza Go- 250ML", "", "Rs. 270", "https://images.khaleejtimes.com/storyimage/KT/20190508/ARTICLE/190509304/AR/0/AR-190509304.jpg"));
-        toReturn.add(new Advertisement("Cat Food", "", "Rs. 510", "https://i.ytimg.com/vi/kcOqug5_M1I/maxresdefault.jpg"));
-        toReturn.add(new Advertisement("Supreme x Nike Air MAX 270 University Red White Black Running Shoes AH8050-610", "", "Rs. 11,000", "https://www.febshoes.com/media/x490/Nike_Air_Max_Shoes/Air_Max_270/Supreme_x_Nike_Air_MAX_270_University_Red_White_Black_Running_Shoes_AH8050-610.jpg"));
+
+        for(int i=0;i<AdManager.advertisements.size();i++){
+            toReturn.add(new Advertisement(AdManager.advertisements.get(i).title, "", "Rs. "+AdManager.advertisements.get(i).price, AdManager.advertisements.get(i).imageUrl, AdManager.advertisements.get(i).url));
+        }
+
         return toReturn;
     }
 }

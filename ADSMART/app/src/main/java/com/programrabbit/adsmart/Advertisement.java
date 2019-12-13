@@ -5,16 +5,26 @@ public class Advertisement {
     String description;
     String price;
     String photo_url;
+    String url;
 
-    public Advertisement(String title, String description, String price, String photo_url) {
+    public Advertisement(String title, String description, String price, String photo_url, String url_) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.photo_url = photo_url;
+        this.url = url_;
     }
 
     public Advertisement(){
 
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getTitle() {

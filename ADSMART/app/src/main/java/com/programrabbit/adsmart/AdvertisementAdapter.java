@@ -1,17 +1,21 @@
 package com.programrabbit.adsmart;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.programrabbit.adsmart.Network.AdManager;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class AdvertisementAdapter extends RecyclerView.Adapter<AdvertisementAdapter.MyViewHolder> {
@@ -35,7 +39,7 @@ public class AdvertisementAdapter extends RecyclerView.Adapter<AdvertisementAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdvertisementAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdvertisementAdapter.MyViewHolder holder, final int position) {
         // here assign to xml
 
         holder.tv_title.setText(advertisementList.get(position).getTitle());
@@ -43,6 +47,18 @@ public class AdvertisementAdapter extends RecyclerView.Adapter<AdvertisementAdap
         holder.tv_description.setText(advertisementList.get(position).getDescription());
 
         Picasso.get().load(advertisementList.get(position).getPhoto_url()).into(holder.thumbnail);
+
+        holder.cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = advertisementList.get(position).getUrl();
+                if (!url.startsWith("http://") && !url.startsWith("https://"))
+                    url = "http://" + url;
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(browserIntent);
+            }
+        });
 
     }
 
@@ -55,13 +71,18 @@ public class AdvertisementAdapter extends RecyclerView.Adapter<AdvertisementAdap
         public TextView tv_title, tv_price, tv_description;
         public ImageView thumbnail;
 
+        public CardView cv;
+
 
         public MyViewHolder(View view){
             super(view);
+
             tv_title = view.findViewById(R.id.tv_title);
             tv_price = view.findViewById(R.id.tv_price);
             tv_description = view.findViewById(R.id.tv_description);
             thumbnail = view.findViewById(R.id.thumbnail);
+
+            cv = view.findViewById(R.id.card_view);
 
             view.setOnClickListener(new View.OnClickListener(){
                 @Override

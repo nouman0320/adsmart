@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "958785937844",
+    "firebase_url": "https://ad-smart-7e464.firebaseio.com",
+    "project_id": "ad-smart-7e464",
+    "storage_bucket": "ad-smart-7e464.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:958785937844:android:3a9428b36e96b590a212e1",
+        "android_client_info": {
+          "package_name": "com.programrabbit.adsmart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "958785937844-p8i4sg8ol6hmjflb22ib7ddnl2ma3rqa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.programrabbit.adsmart",
+            "certificate_hash": "97b4898a1348541cbada60ef6a7666b170ab52f9"
+          }
+        },
+        {
+          "client_id": "958785937844-3f2ailqkbidnb9h013tl458opcne9dn7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApufIM4UoxX3uYSeCoJ-kgoUFrFOT85f4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "958785937844-3f2ailqkbidnb9h013tl458opcne9dn7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
